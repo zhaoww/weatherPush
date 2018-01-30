@@ -39,35 +39,9 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
 
     @Test
     public void testSendEmail(){
-//        System.setProperty("java.net.preferIPv4Stack", "true");
-        String [] to = new String[]{"3045675825@qq.com"};
-        String subject = "zhao.weiwei233";
-        String content = "12333";
-        String from = "zhao.weiwei233@qq.com";
+        String[] to = new String[]{"3045675825@qq.com"};
+        String subject = "标题：测试标题";
+        String content = "测试内容部份";
         mailService.sendSimpleMail(to,subject,content);
-
-    }
-
-    @Test
-    public void testSendEmail2(){
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(username);
-            message.setTo("3045675825@qq.com");
-            message.setSubject("标题：测试标题");
-            message.setText("测试内容部份");
-            javaMailSender.send(message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testSendEmail3(){
-        String [] to = new String[]{"3045675825@qq.com"};
-        String subject = "zhao.weiwei233";
-        String content = "12333";
-        String from = "zhao.weiwei233@qq.com";
-        mailService.sendSimpleMail3(to,subject,content);
     }
 }
