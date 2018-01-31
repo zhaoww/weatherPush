@@ -7,9 +7,23 @@
 </head>
 <body>
 <h4>你好！</h4>
-<ul>
-    <li th:text="${email.content}">222</li>
-</ul>
-祝：开心！
+<div th:with="values=${email.weatherResponseDto.value}">
+    <code>
+        <ul th:each="value : ${values}">
+            <li th:text="${value.city}">city</li>
+            <li th:text="${value.provinceName}">provinceName</li>
+            <li th:each="alarm:${value.alarms}">
+                <p th:text="${alarm.alarmContent}"></p>
+                <p th:text="${alarm.alarmDesc}"></p>
+                <p th:text="${alarm.alarmLevelNoDesc}"></p>
+                <p th:text="${alarm.alarmTypeDesc}"></p>
+                <p th:text="${alarm.precaution}"></p>
+                <p th:text="${alarm.publishTime}"></p>
+            </li>
+
+        </ul>
+    </code>
+</div>
+
 </body>
 </html>

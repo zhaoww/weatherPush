@@ -1,9 +1,11 @@
 package com.zww.weather;
 
 import com.zww.weather.config.EmailProperties;
+import com.zww.weather.model.EmailDto;
 import com.zww.weather.model.WeatherResponseDto;
 import com.zww.weather.service.MailService;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -64,28 +66,20 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
 
     @Test
     public void testSendThymeleafMail(){
-        EmailProperties mail = new EmailProperties();
-        mail.setTo(new String[]{"3045675825@qq.com"});
-        mail.setContent("标题：测试标题");
-        mail.setSubject("测试内容部份");
-        mail.setTemplate("weatherTpl");
-//        mailService.sendThymeleafMail(mail);
+        EmailProperties mailProperties = new EmailProperties();
+        mailProperties.setFrom("zhaoweiwei233@163.com");
+        mailProperties.setTo(new String[]{"3045675825@qq.com"});
+        mailProperties.setContent("标题：测试标题");
+        mailProperties.setSubject("测试内容部份");
+        mailProperties.setTemplate("weatherTpl");
+        EmailDto email = new EmailDto();
+        BeanUtils.copyProperties(mailProperties, email);
+        email.setWeatherResponseDto(getWeatherDtlInfo());
+        mailService.sendThymeleafMail(email);
+    }
 
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = null;
-        try {
-            helper = new MimeMessageHelper(message, true);
-            helper.setFrom("zhaoweiwei233@163.com");
-            helper.setTo(mail.getTo());
-            helper.setSubject(mail.getSubject());
-            Context context = new Context();
-            context.setVariable("email", mail);
-            String text = templateEngine.process(mail.getTemplate(), context);
-            helper.setText(text, true);
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
+    private WeatherResponseDto getWeatherDtlInfo(){
+        String url = "http://aider.meizu.com/app/weather/listWeather?cityIds=101190104" ;
+        return restTemplate.getForObject(url, WeatherResponseDto.class);
     }
 }
