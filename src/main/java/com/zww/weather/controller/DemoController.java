@@ -18,7 +18,7 @@ public class DemoController {
                 "道隐无名。" +
                 "夫唯道，善始且善成。";
         model.addAttribute("textValue",textValue);
-        return "demo/index";
+        return "index";
 
     }
 }
