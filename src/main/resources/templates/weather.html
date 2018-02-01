@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/weather.css"/>
+</head>
+<body>
+<div th:with="values=${email.weatherResponseDto.value}">
+    <code>
+        <div th:each="value : ${values}">
+            <h4 th:text="|${value.provinceName}:${value.city}|"></h4>
+            <div>
+                <label>实时气温:</label>
+                <div class="indent2">
+                    <label>体感温度:</label>
+                    <label th:text="${value.realtime.temp}+'摄氏度'"></label>
+                </div>
+                <div class="indent2">
+                    <label>风向:</label>
+                    <label th:text="${value.realtime.wD}"></label>
+                </div>
+                <div class="indent2">
+                    <label>风力大小:</label>
+                    <label th:text="${value.realtime.wS}"></label>
+                </div>
+                <div class="indent2">
+                    <label>天气情况:</label>
+                    <label th:text="${value.realtime.weather}"></label>
+                </div>
+            </div>
+
+            <div>
+                <label>指数信息:</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>等级</th>
+                            <th>建议</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="index : ${value.indexes}">
+                            <td th:text="${index.name}">th:if="${age gt 30}"abbreviation</td>
+                            <td th:text="${index.level}"></td>
+                            <td th:text="${index.content}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <label>预警信息:</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>预警内容</th>
+                            <th>预警详情</th>
+                            <th>预警等级</th>
+                            <th>预警类型</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="alarm : ${value.alarms}">
+                            <td th:text="${alarm.alarmContent}"></td>
+                            <td th:text="${alarm.alarmDesc}"></td>
+                            <td th:text="${alarm.alarmLevelNoDesc}"></td>
+                            <td th:text="${alarm.alarmTypeDesc}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <label>未来七日天气情况:</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>白天气温</th>
+                            <th>夜间气温</th>
+                            <th>天气情况</th>
+                            <th>风向</th>
+                            <th>风力</th>
+                            <th>星期几</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="weather : ${value.weathers}">
+                            <td th:text="${weather.date}"></td>
+                            <td th:text="${weather.temp_day_c}"></td>
+                            <td th:text="${weather.temp_night_c}"></td>
+                            <td th:text="${weather.weather}"></td>
+                            <td th:text="${weather.wd}"></td>
+                            <td th:text="${weather.ws}"></td>
+                            <td th:text="${weather.week}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </code>
+</div>
+
+</body>
+</html>

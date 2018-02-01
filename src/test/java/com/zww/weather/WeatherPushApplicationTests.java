@@ -71,7 +71,7 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
         mailProperties.setTo(new String[]{"3045675825@qq.com"});
         mailProperties.setContent("标题：测试标题");
         mailProperties.setSubject("测试内容部份");
-        mailProperties.setTemplate("weatherTpl");
+        mailProperties.setTemplate("weather");
         EmailDto email = new EmailDto();
         BeanUtils.copyProperties(mailProperties, email);
         email.setWeatherResponseDto(getWeatherDtlInfo());
