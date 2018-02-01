@@ -68,9 +68,9 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
     public void testSendThymeleafMail(){
         EmailProperties mailProperties = new EmailProperties();
         mailProperties.setFrom("zhaoweiwei233@163.com");
-        mailProperties.setTo(new String[]{"3045675825@qq.com"});
-        mailProperties.setContent("标题：测试标题");
-        mailProperties.setSubject("测试内容部份");
+        mailProperties.setTo(new String[]{"1023181495@qq.com"});
+        mailProperties.setContent("今日天气情况");
+        mailProperties.setSubject("今日天气情况");
         mailProperties.setTemplate("weather");
         EmailDto email = new EmailDto();
         BeanUtils.copyProperties(mailProperties, email);

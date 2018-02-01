@@ -10,29 +10,29 @@
 <div th:with="values=${email.weatherResponseDto.value}">
     <code>
         <div th:each="value : ${values}">
-            <h4 th:text="|${value.provinceName}:${value.city}|"></h4>
+            <h4 th:text="|${value.provinceName} ${value.city}|"></h4>
             <div>
-                <label>实时气温:</label>
+                <label>实时气温</label>
                 <div class="indent2">
-                    <label>体感温度:</label>
+                    <label>体感温度</label>
                     <label th:text="${value.realtime.temp}+'摄氏度'"></label>
                 </div>
                 <div class="indent2">
-                    <label>风向:</label>
+                    <label>风向</label>
                     <label th:text="${value.realtime.wD}"></label>
                 </div>
                 <div class="indent2">
-                    <label>风力大小:</label>
+                    <label>风力大小</label>
                     <label th:text="${value.realtime.wS}"></label>
                 </div>
                 <div class="indent2">
-                    <label>天气情况:</label>
+                    <label>天气情况</label>
                     <label th:text="${value.realtime.weather}"></label>
                 </div>
             </div>
 
             <div>
-                <label>指数信息:</label>
+                <label>指数信息</label>
                 <table>
                     <thead>
                         <tr>
@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="index : ${value.indexes}">
-                            <td th:text="${index.name}">th:if="${age gt 30}"abbreviation</td>
+                            <td th:text="${index.name}"></td>
                             <td th:text="${index.level}"></td>
                             <td th:text="${index.content}"></td>
                         </tr>
@@ -52,7 +52,7 @@
             </div>
 
             <div>
-                <label>预警信息:</label>
+                <label>预警信息</label>
                 <table>
                     <thead>
                         <tr>
@@ -74,7 +74,7 @@
             </div>
 
             <div>
-                <label>未来七日天气情况:</label>
+                <label>未来七日天气情况</label>
                 <table>
                     <thead>
                         <tr>
