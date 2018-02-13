@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 @SpringBootApplication
-@EnableScheduling
 public class WeatherPushApplication {
 
 	@Autowired
