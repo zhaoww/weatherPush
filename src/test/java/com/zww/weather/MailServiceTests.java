@@ -1,24 +1,17 @@
 package com.zww.weather;
 
-import com.zww.weather.config.EmailProperties;
 import com.zww.weather.model.EmailDto;
 import com.zww.weather.model.WeatherResponseDto;
 import com.zww.weather.service.MailService;
+import com.zww.weather.service.WeatherService;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.client.RestTemplate;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
-public class WeatherPushApplicationTests extends AbstractCoreBootTests {
+public class MailServiceTests extends AbstractCoreBootTests {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -30,7 +23,7 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
     private JavaMailSender mailSender;
 
     @Autowired
-    private SpringTemplateEngine templateEngine;
+    private WeatherService weatherService;
 
     @Value("${spring.mail.username}")
     private String username;
@@ -51,10 +44,11 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
 
     @Test
     public void testSendEmail(){
-        EmailProperties mail = new EmailProperties();
-        mail.setTo(new String[]{"1023181495@qq.com"});
+        EmailDto mail = new EmailDto();
+        mail.setTo("1023181495@qq.com");
         mail.setContent("标题：测试标题");
         mail.setSubject("测试内容部份");
+        mail.setCityId("101020100");
 //        mailService.sendSimpleMail(mail);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("zhaoweiwei233@163.com");
@@ -66,20 +60,20 @@ public class WeatherPushApplicationTests extends AbstractCoreBootTests {
 
     @Test
     public void testSendThymeleafMail(){
-        EmailProperties mailProperties = new EmailProperties();
-        mailProperties.setFrom("zhaoweiwei233@163.com");
-        mailProperties.setTo(new String[]{"1023181495@qq.com"});
-        mailProperties.setContent("今日天气情况");
-        mailProperties.setSubject("今日天气情况");
-        mailProperties.setTemplate("weather");
-        EmailDto email = new EmailDto();
-        BeanUtils.copyProperties(mailProperties, email);
-        email.setWeatherResponseDto(getWeatherDtlInfo());
-        mailService.sendThymeleafMail(email);
+        EmailDto mail = new EmailDto();
+        mail.setTo("1023181495@qq.com");
+        mail.setContent("今日天气情况");
+        mail.setSubject("测试内容部份");
+        mail.setCityId("101020100");
+        mail.setFrom("zhaoweiwei233@163.com");
+        mail.setTemplate("weather");
+
+        mail.setWeatherResponseDto(getWeatherDtlInfo());
+        mailService.sendThymeleafMail(mail);
     }
 
     private WeatherResponseDto getWeatherDtlInfo(){
         String url = "http://aider.meizu.com/app/weather/listWeather?cityIds=101190104" ;
-        return restTemplate.getForObject(url, WeatherResponseDto.class);
+        return weatherService.getWeatherDtlInfo(url);
     }
 }

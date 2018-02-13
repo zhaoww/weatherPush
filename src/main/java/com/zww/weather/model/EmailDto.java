@@ -1,7 +1,5 @@
 package com.zww.weather.model;
 
-import java.util.HashMap;
-
 /**
  * Created by zhaoww on 2018/1/31.
  */
@@ -9,7 +7,7 @@ public class EmailDto {
     //必填参数
     private  String from;
 
-    private String[] to;//接收方邮件
+    private String to;//接收方邮件
 
     private String subject;//主题
 
@@ -18,17 +16,9 @@ public class EmailDto {
     //选填
     private String template;//模板
 
-    private HashMap<String, String> kvMap;// 自定义参数
+    private String cityId;
 
     private WeatherResponseDto weatherResponseDto;
-
-    public WeatherResponseDto getWeatherResponseDto() {
-        return weatherResponseDto;
-    }
-
-    public void setWeatherResponseDto(WeatherResponseDto weatherResponseDto) {
-        this.weatherResponseDto = weatherResponseDto;
-    }
 
     public String getFrom() {
         return from;
@@ -38,11 +28,11 @@ public class EmailDto {
         this.from = from;
     }
 
-    public String[] getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(String[] to) {
+    public void setTo(String to) {
         this.to = to;
     }
 
@@ -70,12 +60,19 @@ public class EmailDto {
         this.template = template;
     }
 
-    public HashMap<String, String> getKvMap() {
-        return kvMap;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setKvMap(HashMap<String, String> kvMap) {
-        this.kvMap = kvMap;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
+    public WeatherResponseDto getWeatherResponseDto() {
+        return weatherResponseDto;
+    }
+
+    public void setWeatherResponseDto(WeatherResponseDto weatherResponseDto) {
+        this.weatherResponseDto = weatherResponseDto;
+    }
 }

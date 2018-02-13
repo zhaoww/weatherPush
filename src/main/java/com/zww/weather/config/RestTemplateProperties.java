@@ -22,7 +22,6 @@ public class RestTemplateProperties {
      */
     private int connecttimeout;
 
-
     public int getConnecttimeout() {
         return connecttimeout;
     }

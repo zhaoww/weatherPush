@@ -1,0 +1,16 @@
+{
+  "email":[{
+    "from":"zhaoweiwei233@163.com",
+    "to":"3045675825@qq.com",
+    "cityId":"101020100",
+    "subject":"今日天气情况",
+    "template":"weather"
+  },{
+    "from":"zhaoweiwei233@163.com",
+    "to":"1023181495@qq.com",
+    "cityId":"101190104",
+    "subject":"今日天气情况",
+    "template":"weather"
+  }
+  ]
+}
